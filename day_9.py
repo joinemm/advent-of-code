@@ -1,5 +1,5 @@
 # Project: advent_of_code
-# File: day_9_new
+# File: day_9
 # Author: Joinemm
 # Date created: 09/12/18
 # Python Version: 3.6.6
