@@ -6,6 +6,7 @@
 
 from collections import deque
 
+# input: 459 players; last marble is worth 71320 points
 max_marble = 71320*100
 playercount = 459
 
