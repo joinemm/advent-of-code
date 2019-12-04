@@ -1,6 +1,7 @@
+### RUN TIMES
+> time is cumulative, measured from top of file using `timeit` module.    
+> both parts are in same file.
 ```
-RUN TIMES:
-
 Day 1:
   part 1:     0.0003s
   part 2:     0.0004s
