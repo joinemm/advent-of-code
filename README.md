@@ -17,7 +17,7 @@ Day 4:
 Day 5:
     part 1:     0.0004s
     part 2:     0.0006s
- .
- .
- .
+Day 6:
+    part 1:     0.0203s
+    part 2:     0.0215s
 ```
