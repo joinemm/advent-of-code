@@ -1,30 +1,26 @@
-import time
-
-
 def part1(input: str):
     seeds, rest = input.split("\n\n", 1)
     seeds = [int(x) for x in seeds.split(":", 1)[1].split()]
-    sieves = []
-    for category in rest.split("\n\n"):
-        lines = category.split("\n")
-        ranges = []
-        for line in lines[1:]:
-            ranges.append([int(x) for x in line.split()])
-        sieves.append(sorted(ranges, key=lambda r: r[1], reverse=True))
+
+    layers = [
+        sorted(
+            [[int(x) for x in line.split()] for line in category.split("\n")[1:]],
+            key=lambda x: x[1],
+            reverse=True,
+        )
+        for category in rest.split("\n\n")
+    ]
 
     locations = set()
-
     for seed in seeds:
-        for sieve in sieves:
-            i = 0
-            while i < len(sieve) - 1 and sieve[i][1] > seed:
-                i += 1
-            if (sieve[i][1] + sieve[i][2]) > seed >= sieve[i][1]:
-                diff = seed - sieve[i][1]
-                result = sieve[i][0] + diff
-            else:
-                result = seed
-            seed = result
+        for layer in layers:
+            for dest_start, source_start, m in layer:
+                end = source_start + m
+                if source_start <= seed < end:
+                    diff = dest_start - source_start
+                    seed += diff
+                    break
+
         locations.add(seed)
 
     return min(locations)
@@ -35,14 +31,13 @@ def part2(input: str):
     seed_iterator = iter(int(x) for x in seeds.split(":", 1)[1].split())
     seeds = list(sorted(zip(seed_iterator, seed_iterator)))
 
-    layers = []
-    for category in rest.split("\n\n"):
-        layers.append(
-            sorted(
-                [[int(x) for x in line.split()] for line in category.split("\n")[1:]],
-                key=lambda x: x[1],
-            )
+    layers = [
+        sorted(
+            [[int(x) for x in line.split()] for line in category.split("\n")[1:]],
+            key=lambda x: x[1],
         )
+        for category in rest.split("\n\n")
+    ]
 
     for layer in layers:
         new_seeds = []
